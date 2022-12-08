@@ -38,7 +38,7 @@ child: Row(
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.black),),
-          Text("Redesign motion graphic hello",style: TextStyle(color: Color.fromARGB(255, 87, 86, 86),fontSize: 12.0),)
+          Text("Redesign motion graphic ",style: TextStyle(color: Color.fromARGB(255, 87, 86, 86),fontSize: 12.0),)
 
 ],
 ),
