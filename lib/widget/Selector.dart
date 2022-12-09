@@ -67,6 +67,7 @@ Widget itemselector(
               : Color.fromARGB(255, 232, 229, 229),
           borderRadius: BorderRadius.circular(15)),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           icon,
           Text(value,
