@@ -14,14 +14,16 @@ class TodoListItem extends StatelessWidget{
   
     margin: const EdgeInsets.only(top: 10,left: 10,right: 20),
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20.0),
+      borderRadius: BorderRadius.only(topRight: Radius.circular(19.0),bottomRight: Radius.circular(19.0)),
       color: Color.fromARGB(255, 239, 240, 240),
     ),
 child: Row(
   crossAxisAlignment: CrossAxisAlignment.start,
-  children: [Container(width: 6,color: Colors.pink,
+  children: [ Container(width: 6,
+   
+  decoration: const BoxDecoration(
+    color: Colors.pink,borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(10)))
   ),
-  //decoration: const BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(10)))
   Container(margin: const EdgeInsets.only(left:20),
     width:w-70 ,
   
