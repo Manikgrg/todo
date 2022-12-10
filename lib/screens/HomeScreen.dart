@@ -23,10 +23,13 @@ class HomeScreen extends StatelessWidget {
           //TextButton(onPressed: (){}, child: const Text("View more",style: TextStyle(color: Colors.black),))
         ],
       ),
-      body: Column(children: [
-        Expanded(child: ToDolistHorizontal()),
-        Expanded(child: Todolist())
-      ]),
+      body: Container(
+        color: Color.fromARGB(255, 250, 249, 249),
+        child: Column(children: [
+          Expanded(child: ToDolistHorizontal()),
+          Expanded(child: Todolist())
+        ]),
+      ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.all(10.0),
         child: AppButton(
