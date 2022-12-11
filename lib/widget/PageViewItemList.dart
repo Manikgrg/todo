@@ -1,3 +1,6 @@
+import 'dart:js_util';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/src/circular_step_progress_indicator.dart';
 
@@ -11,16 +14,17 @@ class PageViewItemList extends StatefulWidget {
 class _PageViewItemListState extends State<PageViewItemList> {
   String textdescription = '''Design a simple homepages with clean
 layout and color based on the guidelines..''';
+  var progressdata = 78;
+  bool stop = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10.0),
-      padding: const EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        margin: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -143,11 +147,98 @@ layout and color based on the guidelines..''';
                         color: Color.fromARGB(255, 212, 211, 211),
                         fontSize: 12),
                   ),
-                  Row(
-                    children: <Widget>[
+                  tap(progressdata: progressdata),
+                ],
+              )
+            ],
+          ),
+        ]));
+  }
+
+  Future<void> loop() async {
+    progressdata = 1;
+    stop = false;
+    for (int i = 1; i <= 100; i++) {
+      // if (!stream.isClosed) stream.sink.addStream(Stream.value(i));
+      await Future.delayed(Duration(milliseconds: 50));
+      var element = i;
+      print(element);
+      if (!stop) {
+        setState(() {
+          progressdata = i;
+          print(progressdata);
+        });
+      } else {
+        print("stop");
+        break;
+      }
+    }
+    if (!stop) {
+      progressdata = 1;
+      loop();
+    }
+  }
+
+  Future<void> loopstop() async {
+    stop = true;
+  }
+
+  Widget tap({required final int progressdata}) {
+    return GestureDetector(
+        onDoubleTap: loop,
+        onLongPress: loopstop,
+        child: Row(
+          children: [
+            CircularStepProgressIndicator(
+              totalSteps: 100,
+              currentStep: progressdata,
+              stepSize: 1.0,
+              selectedColor: Color.fromARGB(255, 166, 229, 199),
+              unselectedColor: Colors.grey[200],
+              padding: 0,
+              width: 20,
+              height: 20,
+              selectedStepSize: 3,
+            ),
+            Text(
+              progressdata.toString(),
+              style: TextStyle(
+                  color: Color.fromARGB(255, 74, 73, 73),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+  }
+  @override
+  void deactivate() {
+    // TODO: implement deactivate
+    super.deactivate();
+  }
+
+  @override
+  void didUpdateWidget(covariant PageViewItemList oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
+}
+/*
+Row(
+                    children: [
                       CircularStepProgressIndicator(
                         totalSteps: 100,
-                        currentStep: 78,
+                        currentStep: progressdata,
                         stepSize: 1.0,
                         selectedColor: Color.fromARGB(255, 166, 229, 199),
                         unselectedColor: Colors.grey[200],
@@ -157,7 +248,7 @@ layout and color based on the guidelines..''';
                         selectedStepSize: 3,
                       ),
                       Text(
-                        "78%",
+                        progressdata.toString(),
                         style: TextStyle(
                             color: Color.fromARGB(255, 74, 73, 73),
                             fontSize: 16,
@@ -165,12 +256,4 @@ layout and color based on the guidelines..''';
                       ),
                     ],
                   )
-                ],
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
+*/

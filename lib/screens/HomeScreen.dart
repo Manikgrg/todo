@@ -15,19 +15,39 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(
               fontSize: 16.0, fontWeight: FontWeight.bold, color: Colors.black),
         ),
-        actions: [
-          AppButton(
-            value1: "View",
-            onPressed: () {},
-          )
-          //TextButton(onPressed: (){}, child: const Text("View more",style: TextStyle(color: Colors.black),))
-        ],
       ),
       body: Container(
-        color: Color.fromARGB(255, 250, 249, 249),
+        color: Color.fromARGB(255, 235, 234, 234),
         child: Column(children: [
           Expanded(child: ToDolistHorizontal()),
-          Expanded(child: Todolist())
+          Padding(
+            padding: const EdgeInsets.all(1.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0, right: 30.0),
+                  child: Text(
+                    "Completed",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
+                  ),
+                ),
+                AppButton(
+                  value1: "View More",
+                  onPressed: () {},
+                  border: true,
+                  borderdesign: false,
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Todolist(),
+            ),
+          )
         ]),
       ),
       bottomNavigationBar: Padding(
