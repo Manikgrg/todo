@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:todo/screens/HomeScreen.dart';
 
-class TOdoapp extends StatelessWidget{
+import 'package:todo/screens/home_screen.dart';
+
+class TOdoapp extends StatelessWidget {
   const TOdoapp({super.key});
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,5 @@ class TOdoapp extends StatelessWidget{
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(),
     );
-
   }
-
 }

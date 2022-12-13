@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+
 
 class TodoListItem extends StatelessWidget{
   const TodoListItem({super.key});
@@ -7,13 +7,11 @@ class TodoListItem extends StatelessWidget{
   Widget build(BuildContext context) {
     double w=MediaQuery.of(context).size.width;
    
-  return Container(
-    
-    
+  return Container(   
     height: 100.0,
   
     margin: const EdgeInsets.only(top: 10,left: 10,right: 20),
-    decoration: BoxDecoration(
+    decoration: const  BoxDecoration(
       borderRadius: BorderRadius.only(topRight: Radius.circular(19.0),bottomRight: Radius.circular(19.0)),
       color: Color.fromARGB(255, 239, 240, 240),
     ),
@@ -34,7 +32,7 @@ child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
   children: [Column(
     crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
+    children: const  [
               Text("Meeting with Client",
                   style: TextStyle(
                     fontSize: 16.0,
@@ -44,11 +42,11 @@ child: Row(
 
 ],
 ),
-  Icon(Icons.check_circle ), ],),const  Divider(height: 20.0,),
+  const  Icon(Icons.check_circle ), ],),const  Divider(height: 20.0,),
   Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-    Text("Today   11:25pm ",
+    const  Text("Today   11:25pm ",
   style:TextStyle(
     color: Color.fromARGB(255, 114, 113, 113),
     fontSize: 12.0),),

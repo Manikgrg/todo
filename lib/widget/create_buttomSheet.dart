@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:todo/widget/Selector.dart';
+import 'package:todo/widget/selector.dart';
 import 'package:todo/widget/app_input.dart';
 import 'package:todo/widget/appbutton.dart';
 import 'package:todo/widget/date&timeselector.dart';
@@ -11,7 +11,7 @@ class CreateButtonsheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(builder: (context, visiblity) {
-      print(visiblity);
+     // print(visiblity);
       return SizedBox(
         height: visiblity ? 700.0 : null,
         child: Padding(
@@ -21,37 +21,35 @@ class CreateButtonsheet extends StatelessWidget {
             children: [
               Container(
                   padding: const EdgeInsets.all(10),
-                  child: Text(
+                  child: const  Text(
                     "New task todo",
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
                   )),
-              Divider(
+             const   Divider(
                 thickness: 3.0,
               ),
+               Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: const  [
+                     Text(
+                     'Tittle Task',
+                     style: TextStyle(
+                         fontWeight: FontWeight.bold, fontSize: 20.0),
+                   ),
+                   SizedBox(
+                     height: 5.0,
+                   ),
+                   AppInput(
+                     hinttext: "Add Tittle task",
+                     ismultiline: false,
+                   )
+                 ],
+               ),
               Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Tittle Task',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.0),
-                    ),
-                    SizedBox(
-                      height: 5.0,
-                    ),
-                    AppInput(
-                      hinttext: "Add Tittle task",
-                      ismultiline: false,
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const  [
                     SizedBox(
                       height: 5.0,
                     ),
@@ -71,7 +69,7 @@ class CreateButtonsheet extends StatelessWidget {
               Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const  [
                     Text(
                       "Description",
                       style: TextStyle(
@@ -87,7 +85,7 @@ class CreateButtonsheet extends StatelessWidget {
               Container(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const  [
                       Text(
                         "Date And TIme",
                         style: TextStyle(
@@ -109,7 +107,7 @@ class CreateButtonsheet extends StatelessWidget {
                     child: AppButton(
                         value1: "Create",
                         onPressed: () {
-                          print("create the todo");
+                          //print("create the todo");
                         }),
                   )
                 ]),

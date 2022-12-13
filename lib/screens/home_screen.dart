@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo/widget/Todolist.dart';
-import 'package:todo/widget/TodolistHorizontal.dart';
+import 'package:todo/widget/todolist.dart';
+import 'package:todo/widget/todo_list_horizontal.dart';
 import 'package:todo/widget/appbutton.dart';
 import 'package:todo/widget/create_buttomSheet.dart';
 
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: Container(
-        color: Color.fromARGB(255, 235, 234, 234),
+        color: const Color.fromARGB(255, 235, 234, 234),
         child: Column(children: [
           Expanded(child: ToDolistHorizontal()),
           Padding(
@@ -25,8 +25,8 @@ class HomeScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0, right: 30.0),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20.0, right: 30.0),
                   child: Text(
                     "Completed",
                     style:
@@ -42,16 +42,16 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
+          const Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(left: 10.0),
+              padding: EdgeInsets.only(left: 10.0),
               child: Todolist(),
             ),
           )
         ]),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: AppButton(
           value1: "create dami  ",
           onPressed: () {

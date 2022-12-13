@@ -1,11 +1,10 @@
-import 'dart:js_util';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/src/circular_step_progress_indicator.dart';
 
 class PageViewItemList extends StatefulWidget {
-  const PageViewItemList({super.key});
+  final Color colorshade;
+
+  const PageViewItemList({super.key, required this.colorshade});
 
   @override
   State<PageViewItemList> createState() => _PageViewItemListState();
@@ -22,15 +21,20 @@ layout and color based on the guidelines..''';
     return Container(
         margin: const EdgeInsets.all(10.0),
         padding: const EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+              color: widget.colorshade,
+              spreadRadius: 5,
+              offset: Offset(0, 5),
+              blurStyle: BlurStyle.inner),
+        ], color: Colors.white, borderRadius: BorderRadius.circular(10)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     "Design UI ToDo APP",
                     style: TextStyle(
@@ -46,37 +50,39 @@ layout and color based on the guidelines..''';
               ),
               Container(
                   margin: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                    BoxShadow(
-                        color: Color.fromARGB(255, 251, 243, 172),
-                        spreadRadius: 10)
-                  ]),
-                  child: Icon(
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Color.fromARGB(255, 251, 243, 172),
+                            spreadRadius: 10)
+                      ]),
+                  child: const Icon(
                     Icons.people_outline,
                     size: 20,
                   )),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
-          Divider(
+          const Divider(
             thickness: 1.0,
           ),
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
-          Text(
+          const Text(
             "Description",
             style: TextStyle(
                 color: Color.fromARGB(255, 212, 211, 211), fontSize: 12),
           ),
           Text(
             textdescription,
-            style:
-                TextStyle(color: Color.fromARGB(255, 21, 20, 20), fontSize: 12),
+            style: const TextStyle(
+                color: Color.fromARGB(255, 21, 20, 20), fontSize: 12),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
@@ -85,7 +91,7 @@ layout and color based on the guidelines..''';
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Teams:",
                     style: TextStyle(
                         color: Color.fromARGB(255, 212, 211, 211),
@@ -141,7 +147,7 @@ layout and color based on the guidelines..''';
               ),
               Column(
                 children: [
-                  Text(
+                  const Text(
                     "Progress:",
                     style: TextStyle(
                         color: Color.fromARGB(255, 212, 211, 211),
@@ -160,16 +166,16 @@ layout and color based on the guidelines..''';
     stop = false;
     for (int i = 1; i <= 100; i++) {
       // if (!stream.isClosed) stream.sink.addStream(Stream.value(i));
-      await Future.delayed(Duration(milliseconds: 50));
+      await Future.delayed(const Duration(milliseconds: 50));
       var element = i;
-      print(element);
+      // print(element);
       if (!stop) {
         setState(() {
           progressdata = i;
-          print(progressdata);
+          //   print(progressdata);
         });
       } else {
-        print("stop");
+        // print("stop");
         break;
       }
     }
@@ -193,7 +199,7 @@ layout and color based on the guidelines..''';
               totalSteps: 100,
               currentStep: progressdata,
               stepSize: 1.0,
-              selectedColor: Color.fromARGB(255, 166, 229, 199),
+              selectedColor: const Color.fromARGB(255, 166, 229, 199),
               unselectedColor: Colors.grey[200],
               padding: 0,
               width: 20,
@@ -202,7 +208,7 @@ layout and color based on the guidelines..''';
             ),
             Text(
               progressdata.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color.fromARGB(255, 74, 73, 73),
                   fontSize: 16,
                   fontWeight: FontWeight.bold),
@@ -210,29 +216,11 @@ layout and color based on the guidelines..''';
           ],
         ));
   }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-  }
-  @override
-  void deactivate() {
-    // TODO: implement deactivate
-    super.deactivate();
-  }
-
-  @override
-  void didUpdateWidget(covariant PageViewItemList oldWidget) {
-    // TODO: implement didUpdateWidget
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
 }
+
+
+
+
 /*
 Row(
                     children: [
