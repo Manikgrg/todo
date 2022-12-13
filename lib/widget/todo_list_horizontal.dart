@@ -10,7 +10,7 @@ class ToDolistHorizontal extends StatefulWidget {
 }
 
 class _ToDolistHorizontalState extends State<ToDolistHorizontal> {
-  PageController _pageController = PageController(viewportFraction: 0.8);
+  final PageController _pageController = PageController(viewportFraction: 0.8);
   final _colorshade = [Colors.orange, Colors.blue, Colors.green, Colors.red];
 
   @override

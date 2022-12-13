@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DateAndTimeSelector extends StatefulWidget {
-  const DateAndTimeSelector({super.key});
+  final Function(DateTime) datetimeselected;
+  const DateAndTimeSelector({super.key, required this.datetimeselected});
 
   @override
   State<DateAndTimeSelector> createState() => _DateAndTimeSelectorState();
@@ -27,7 +28,7 @@ class _DateAndTimeSelectorState extends State<DateAndTimeSelector> {
           value: _selectedDate == null
               ? 'Date'
               : '${_selectedDate?.year}/${_selectedDate?.month}/${_selectedDate?.day}',
-          icon: const  Icon(
+          icon: const Icon(
             Icons.calendar_month_rounded,
             color: Colors.grey,
           ),
@@ -41,6 +42,13 @@ class _DateAndTimeSelectorState extends State<DateAndTimeSelector> {
             setState(() {
               _selectedDate = pickDate;
             });
+            final datetimetopas = DateTime(
+                _selectedDate!.year,
+                _selectedDate!.month,
+                _selectedDate!.day,
+                _selectedTime?.hour ?? 0,
+                _selectedTime?.minute ?? 0);
+            widget.datetimeselected(datetimetopas);
           },
         )),
         Expanded(
@@ -48,7 +56,7 @@ class _DateAndTimeSelectorState extends State<DateAndTimeSelector> {
           value: _selectedTime == null
               ? 'Time'
               : '${_selectedTime?.hour}:${_selectedTime?.minute}',
-          icon: const  Icon(
+          icon: const Icon(
             Icons.timelapse,
             color: Color.fromARGB(255, 69, 68, 68),
           ),
@@ -57,10 +65,17 @@ class _DateAndTimeSelectorState extends State<DateAndTimeSelector> {
               context: context,
               initialTime: currentTime,
             );
-           // print(pickedTime);
+            // print(pickedTime);
             setState(() {
               _selectedTime = pickedTime;
             });
+            final datetimetopass = DateTime(
+                _selectedDate?.year ?? 0,
+                _selectedDate?.month ?? 0,
+                _selectedDate?.day ?? 0,
+                _selectedTime!.hour,
+                _selectedTime!.minute);
+            widget.datetimeselected(datetimetopass);
           },
         )),
       ],
@@ -78,13 +93,14 @@ Widget itemselector({
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
       decoration: BoxDecoration(
-          color: const  Color.fromARGB(255, 249, 247, 247),
+          color: const Color.fromARGB(255, 249, 247, 247),
           borderRadius: BorderRadius.circular(15)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           icon,
-          Text(value, style: const  TextStyle(color: Color.fromARGB(255, 90, 89, 89))),
+          Text(value,
+              style: const TextStyle(color: Color.fromARGB(255, 90, 89, 89))),
         ],
       ),
     ),

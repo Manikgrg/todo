@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Selector extends StatefulWidget {
-  const Selector({super.key});
+  final Function(String) oncategoryselect;
+  const Selector({super.key, required this.oncategoryselect});
 
   @override
   State<Selector> createState() => _SelectorState();
@@ -22,12 +23,13 @@ class _SelectorState extends State<Selector> {
                   Icons.person,
                   color: activecategory == "personal"
                       ? Colors.white
-                      : const  Color.fromARGB(255, 80, 79, 79),
+                      : const Color.fromARGB(255, 80, 79, 79),
                 ),
                 onPressed: () {
                   setState(() {
                     activecategory = 'personal';
                   });
+                  widget.oncategoryselect("personal");
                 },
                 ispersonalstatus: activecategory == 'personal')),
         Expanded(
@@ -37,12 +39,13 @@ class _SelectorState extends State<Selector> {
                   Icons.people,
                   color: activecategory == 'team'
                       ? Colors.white
-                      : const  Color.fromARGB(255, 69, 68, 68),
+                      : const Color.fromARGB(255, 69, 68, 68),
                 ),
                 onPressed: () {
                   setState(() {
                     activecategory = 'team';
                   });
+                  widget.oncategoryselect("team");
                 },
                 ispersonalstatus: activecategory == 'team')),
       ],
@@ -62,7 +65,7 @@ Widget itemselector(
       decoration: BoxDecoration(
           color: ispersonalstatus
               ? Colors.blue
-              : const  Color.fromARGB(255, 232, 229, 229),
+              : const Color.fromARGB(255, 232, 229, 229),
           borderRadius: BorderRadius.circular(15)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

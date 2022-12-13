@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:todo/model/todo_create.dart';
 import 'package:todo/widget/selector.dart';
 import 'package:todo/widget/app_input.dart';
 import 'package:todo/widget/appbutton.dart';
 import 'package:todo/widget/date&timeselector.dart';
 
-class CreateButtonsheet extends StatelessWidget {
-  const CreateButtonsheet({super.key});
+class CreateButtonsheet extends StatefulWidget {
+  final Function(Todo) onPressedCreate;
+  const CreateButtonsheet({super.key, required this.onPressedCreate});
+
+  @override
+  State<CreateButtonsheet> createState() => _CreateButtonsheetState();
+}
+
+class _CreateButtonsheetState extends State<CreateButtonsheet> {
+  final TextEditingController _titlecontroller = TextEditingController();
+  final TextEditingController _descriptioncontroller = TextEditingController();
+  String _category = "personal";
+  DateTime? _datetime;
 
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(builder: (context, visiblity) {
-     // print(visiblity);
+      // print(visiblity);
       return SizedBox(
         height: visiblity ? 700.0 : null,
         child: Padding(
@@ -21,35 +33,35 @@ class CreateButtonsheet extends StatelessWidget {
             children: [
               Container(
                   padding: const EdgeInsets.all(10),
-                  child: const  Text(
+                  child: const Text(
                     "New task todo",
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
                   )),
-             const   Divider(
+              const Divider(
                 thickness: 3.0,
               ),
-               Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: const  [
-                     Text(
-                     'Tittle Task',
-                     style: TextStyle(
-                         fontWeight: FontWeight.bold, fontSize: 20.0),
-                   ),
-                   SizedBox(
-                     height: 5.0,
-                   ),
-                   AppInput(
-                     hinttext: "Add Tittle task",
-                     ismultiline: false,
-                   )
-                 ],
-               ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Tittle Task',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                  ),
+                  const SizedBox(
+                    height: 5.0,
+                  ),
+                  AppInput(
+                      hinttext: "Add Tittle task",
+                      ismultiline: false,
+                      controller: _titlecontroller)
+                ],
+              ),
               Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const  [
+                  children: [
                     SizedBox(
                       height: 5.0,
                     ),
@@ -62,36 +74,48 @@ class CreateButtonsheet extends StatelessWidget {
                     SizedBox(
                       height: 5.0,
                     ),
-                    Selector()
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const  [
-                    Text(
-                      "Description",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.0),
-                    ),
-                    AppInput(
-                      hinttext: "Add describtion",
-                      ismultiline: true,
+                    Selector(
+                      oncategoryselect: (String category) {
+                        setState(() {
+                          _category = category;
+                        });
+                      },
                     )
                   ],
                 ),
               ),
               Container(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Description",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20.0),
+                    ),
+                    AppInput(
+                        hinttext: "Add describtion",
+                        ismultiline: true,
+                        controller: _descriptioncontroller)
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const  [
-                      Text(
+                    children: [
+                      const Text(
                         "Date And TIme",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20.0),
                       ),
-                      DateAndTimeSelector()
+                      DateAndTimeSelector(
+                        datetimeselected: (DateTime datetime) {
+                          setState(() {
+                            _datetime = datetime;
+                          });
+                        },
+                      ),
                     ]),
               ),
               Container(
@@ -107,7 +131,18 @@ class CreateButtonsheet extends StatelessWidget {
                     child: AppButton(
                         value1: "Create",
                         onPressed: () {
-                          //print("create the todo");
+                          print(_titlecontroller.text);
+                          print(_descriptioncontroller.text);
+                          print(_category);
+                          print(_datetime);
+
+                          final todo = Todo(
+                              title: _titlecontroller.text,
+                              description: _descriptioncontroller.text,
+                              category: _category,
+                              dateTime: _datetime!);
+                          widget.onPressedCreate(todo);
+                          print("Here test");
                         }),
                   )
                 ]),

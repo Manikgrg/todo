@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:todo/model/todo_create.dart';
 import 'package:todo/widget/todolist.dart';
 import 'package:todo/widget/todo_list_horizontal.dart';
 import 'package:todo/widget/appbutton.dart';
 import 'package:todo/widget/create_buttomSheet.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<Todo> _todo = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,10 +51,12 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Padding(
               padding: EdgeInsets.only(left: 10.0),
-              child: Todolist(),
+              child: Todolist(
+                todos: _todo,
+              ),
             ),
           )
         ]),
@@ -59,8 +70,16 @@ class HomeScreen extends StatelessWidget {
                 context: context,
                 isScrollControlled: true,
                 builder: (context) {
-                  return const Center(
-                    child: CreateButtonsheet(),
+                  return Center(
+                    child: CreateButtonsheet(
+                      onPressedCreate: (Todo todo) {
+                        setState(() {
+                          _todo.add(todo);
+                        });
+
+                        print(todo.title);
+                      },
+                    ),
                   );
                 });
           },
