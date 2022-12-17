@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:newproject/input/app_input.dart';
 import 'package:newproject/input/appbutton.dart';
 import 'package:newproject/selector/date&timeselector.dart';
@@ -140,7 +141,7 @@ class _CreateButtonsheetState extends State<CreateButtonsheet> {
                         
                                   if(_titlecontroller.text.isEmpty||_descriptioncontroller.text.isEmpty||_datetime==null)
                                   {
-                                    print("Tittle cant be empty");
+                                  Fluttertoast.showToast(msg: "please fill all field",textColor: Colors.red,webBgColor: LinearGradient(colors:[Colors.grey] )); 
                                     }
                                     else{
                                     

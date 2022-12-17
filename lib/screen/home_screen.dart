@@ -90,6 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() {
                         _todo.add(todo);
                       });
+                      print("tittle is ${todo.title}");
+                       print("tittle is ${todo.category}");
+                        print("tittle is ${todo.description}");
+                        print("tittle is ${todo.dateTime}");
+
                       Navigator.pop(context);
                      
                     },
