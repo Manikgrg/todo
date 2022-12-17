@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:newproject/recycleview/todo_list_item.dart';
 
 import '../model/todo_create.dart';
 
@@ -12,15 +13,22 @@ class Todolist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: 5,
+        itemCount: todos.length,
         itemBuilder: (context, index) {
+          final todo=todos[index];
          
-          return 
+          return TodoListItem(todo: todo,onPressedEdit: (Todo todo) {
+          todo=todo;
+         
+
+            
+          },onPressedDelete_todolist: (Todo todo) {
+            todo=todo;
+            print('Press on delete');
+            
+          },);
               
-                   Container(
-                    color: Colors.green,
-                    child: Text("hellow motherfucker"),
-                   );
+                   
             
             
 

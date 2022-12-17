@@ -60,12 +60,15 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.only(left: 10.0),
               child: Todolist(
                 todos: _todo,onPressedEdit: (Todo todo) {
+                  print("presss on edit");
+                  _todo.remove(todo);
                   Navigator.pop(context);
                 },
                 onPressedDelete: (Todo todo) {
                   setState(() {
                     _todo.remove(todo);
                   });
+                  print("presss on delete on homescreen");
                   Navigator.pop(context);
                 },
               ),
@@ -87,7 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() {
                         _todo.add(todo);
                       });
-                       print(" from inside homescreen${_todo}"); 
+                      Navigator.pop(context);
+                     
                     },
                      
                     ),
