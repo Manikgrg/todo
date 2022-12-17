@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newproject/screen/viewmorescreen.dart';
 
 import '../input/appbutton.dart';
 import '../input/create_buttomSheet.dart';
@@ -48,7 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 AppButton(
                   value1: "View More",
-                  onPressed: () {},
+                  onPressed: () async {
+
+                    List<Todo> updatelist=await Navigator.push(context, MaterialPageRoute(builder: (context){
+                      return ViewMoreScreen(todo: _todo,);
+                    }));
+                    setState(() {
+                      _todo=updatelist;
+                    });
+                  },
                   border: true,
                   borderdesign: false,
                 )
@@ -62,8 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 todos: _todo,
                 onPressedEdit: (Todo todo) {
                    print("click at homescree annd data is ${todo.title}");
-                 
-
                   showModalBottomSheet(context: context,
                   isScrollControlled: true,builder: (context) {
                     return CreateButtonsheet(

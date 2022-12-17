@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newproject/input/todo_action_bottom_sheet.dart';
 import 'package:newproject/model/todo_create.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 
 class TodoListItem extends StatelessWidget {
@@ -52,70 +53,86 @@ class TodoListItem extends StatelessWidget {
                         bottomLeft: Radius.circular(10)))
                     ),
                     Container(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text(
-                                      todo.title,
-                                      style: const TextStyle(
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                    ),
-                                    Text(
-                                      todo.description,
-                                      style: const TextStyle(
-                                          color: Color.fromARGB(255, 87, 86, 86),
-                                          fontSize: 12.0),
-                                    ),
-                                 ],
+                     
+                      child: Expanded(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20,top: 5,bottom: 5,right: 30),
+                              child: Row(
+                                 
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text(
+                                         todo.title,
+                                         style: const TextStyle(
+                                             fontSize: 16.0,
+                                             fontWeight: FontWeight.bold,
+                                             color: Colors.black),
+                                       ),
+                               
+                               Text(
+                                 todo.description,
+                                 style: const TextStyle(
+                                         color: Color.fromARGB(255, 87, 86, 86),
+                                         fontSize: 12.0),
                                ),
-                            ],
-                          ),
-                        ],
+                                    ],
+                                  ),
+                                  Icon(Icons.check_circle,color: Colors.blue,)
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 10,),
+                            Divider(thickness: 1,),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 30,right: 30),
+                              child: Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(timeago.format(todo.dateTime)),
+                                    Stack(
+                                      children: [
+                                        Container(
+                          width: 20.0,
+                          height: 20.0,
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage('assets/png/blackperson1.jpg'),
+                                  fit: BoxFit.cover),
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                          )),
+                      Container(
+                          margin: const EdgeInsets.only(left: 15),
+                          width: 20.0,
+                          height: 20.0,
+                          decoration: const BoxDecoration(
+                                color: Colors.blue,
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: AssetImage('assets/png/boy.jpg'),
+                                    fit: BoxFit.cover))),
+                                      ],
+                                    )
+                                  ],
+                              ),
+                            )
+                          ],
+                        ),
                       )
                     ),
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        ]
+                ]
         ) ,
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        )
-        
-        
       
+        
+      )  
       
     );
-         
-                        
       
-    
-    
-   
   }
 }
 
