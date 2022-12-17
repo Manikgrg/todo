@@ -10,20 +10,34 @@ import '../model/todo_create.dart';
 
 
 class CreateButtonsheet extends StatefulWidget {
-  //final Todo? todotoEdit;
-  final Function(Todo) onPressedCreate;
-  const CreateButtonsheet({super.key,required this.onPressedCreate});
+  final Todo? todotoEdit;
+  final Function(Todo,bool) onPressedCreate;
+  const CreateButtonsheet({super.key, this.todotoEdit, required this.onPressedCreate});
 
   @override
   State<CreateButtonsheet> createState() => _CreateButtonsheetState();
 }
 
 class _CreateButtonsheetState extends State<CreateButtonsheet> {
-  final TextEditingController _titlecontroller = TextEditingController();
-  final TextEditingController _descriptioncontroller = TextEditingController();
+  String _id=DateTime.now().millisecondsSinceEpoch.toString();
+   TextEditingController _titlecontroller = TextEditingController();
+ TextEditingController _descriptioncontroller = TextEditingController();
   String _category = "personal";
   DateTime? _datetime;
 
+@override
+  void initState() {
+    // TODO: implement initState
+    if(widget.todotoEdit!=null)
+    {
+      _id=widget.todotoEdit!.id;
+      _titlecontroller.text=widget.todotoEdit!.title;
+      _descriptioncontroller.text=widget.todotoEdit!.description;
+      _category=widget.todotoEdit!.category;
+      _datetime=widget.todotoEdit!.dateTime;
+    }
+  ;
+  }
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(builder: (context, visiblity) {
@@ -79,6 +93,7 @@ class _CreateButtonsheetState extends State<CreateButtonsheet> {
                       height: 5.0,
                     ),
                     Selector(
+                      initialcategory: _category,
                       oncategoryselect: (String category) {
                         setState(() {
                           _category = category;
@@ -115,6 +130,7 @@ class _CreateButtonsheetState extends State<CreateButtonsheet> {
                             fontWeight: FontWeight.bold, fontSize: 20.0),
                       ),
                        DateAndTimeSelector(
+                        initialdate: _datetime,
                         datetimeselected: (DateTime datetime) {
                           setState(() {
                             _datetime = datetime;
@@ -136,22 +152,26 @@ class _CreateButtonsheetState extends State<CreateButtonsheet> {
                           })),
                   Expanded(
                     child: AppButton(
-                        value1: "Create",
+                        value1:widget.todotoEdit!=null?"Edit " :"Create",
                         onPressed: () {
                         
                                   if(_titlecontroller.text.isEmpty||_descriptioncontroller.text.isEmpty||_datetime==null)
                                   {
-                                  Fluttertoast.showToast(msg: "please fill all field",textColor: Colors.red,webBgColor: LinearGradient(colors:[Colors.grey] )); 
+                                  Fluttertoast.showToast(msg: "please fill all field",textColor: Colors.red, ); 
                                     }
                                     else{
                                     
                            final todo = Todo(
+                            id: _id,
                               title: _titlecontroller.text,
                               description: _descriptioncontroller.text,
                               category: _category,
                               dateTime: _datetime!
                              );
-                             widget.onPressedCreate(todo);
+                             print("id is $_id");
+                             final isediting=widget.todotoEdit!=null;
+                             widget.onPressedCreate(todo,isediting);
+                             Navigator.pop(context);
                                     }
                                  
                                   

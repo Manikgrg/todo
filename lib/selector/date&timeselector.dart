@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DateAndTimeSelector extends StatefulWidget {
+  final DateTime? initialdate;
+ 
   final Function(DateTime) datetimeselected;
-  const DateAndTimeSelector({super.key, required this.datetimeselected});
+  const DateAndTimeSelector({super.key,this.initialdate, required this.datetimeselected});
 
   @override
   State<DateAndTimeSelector> createState() => _DateAndTimeSelectorState();
@@ -12,6 +14,17 @@ class _DateAndTimeSelectorState extends State<DateAndTimeSelector> {
   String activecategory = 'personal';
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(widget.initialdate!=null)
+    {
+      _selectedDate= DateTime(widget.initialdate!.year,widget.initialdate!.month,widget.initialdate!.day);
+      _selectedTime=TimeOfDay( hour:widget.initialdate!.hour, minute:widget.initialdate!.minute);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

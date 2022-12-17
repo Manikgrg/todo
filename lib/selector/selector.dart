@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Selector extends StatefulWidget {
+  final String? initialcategory;
   final Function(String) oncategoryselect;
-  const Selector({super.key, required this.oncategoryselect});
+  const Selector({super.key, required this.oncategoryselect,this.initialcategory});
+
+  
 
   @override
   State<Selector> createState() => _SelectorState();
@@ -10,6 +13,16 @@ class Selector extends StatefulWidget {
 
 class _SelectorState extends State<Selector> {
   String activecategory = 'personal';
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(widget.initialcategory!=null)
+    {
+     activecategory=widget.initialcategory!;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

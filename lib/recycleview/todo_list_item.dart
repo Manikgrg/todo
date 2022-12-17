@@ -6,27 +6,28 @@ import 'package:newproject/model/todo_create.dart';
 class TodoListItem extends StatelessWidget {
   final Todo todo;
   final Function(Todo) onPressedEdit;
-  final Function(Todo) onPressedDelete_todolist;
+  final Function(Todo) onPressedDelete;
 
-  const TodoListItem({super.key, required this.todo,required this.onPressedEdit,required this.onPressedDelete_todolist});
+  const TodoListItem({super.key, required this.todo,required this.onPressedEdit,required this.onPressedDelete});
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
 
     return GestureDetector(
       onLongPress: () {
-        showModalBottomSheet(context: context,
+        showModalBottomSheet(
+          context: context,
+          shape: const RoundedRectangleBorder(
+            borderRadius:  BorderRadius.only(topLeft: Radius.circular(15.0),topRight: Radius.circular(15.0)
+            )
+          ),
          builder: (context){
-          return  ToDoActionBottomsheet(
-            
-            onPressedEdit: () {
-            print("inside todoitem ${todo.title}");
-            onPressedEdit(todo);
-
-
-          },onPressedDelete_todoactionbotton: () {
-            onPressedDelete_todolist(todo);
-          },
+          return  ToDoActionBottomsheet(        
+            onPressedEdit:(){
+              onPressedEdit(todo);}
+          ,onPressedDelete: (){
+            onPressedDelete(todo);}
+          
          );
       });
       },

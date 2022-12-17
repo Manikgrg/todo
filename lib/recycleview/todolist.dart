@@ -18,23 +18,8 @@ class Todolist extends StatelessWidget {
         itemBuilder: (context, index) {
           final todo=todos[index];
          
-          return TodoListItem(todo: todo,onPressedEdit: (Todo todo) {
-          todo=todo;
-         
-
-            
-          },onPressedDelete_todolist: (Todo todo) {
-            todo=todo;
-            print('Press on delete');
-            
-          },);
-              
-                   
-            
-            
-
-          
-           
+          return TodoListItem(todo: todo,onPressedEdit:onPressedEdit,onPressedDelete:onPressedDelete,);                              
+                      
         });
   }
 }

@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Todo> _todo = [];
 
-  
+   
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +58,35 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(left: 10.0),
-              child: Todolist(
-                todos: _todo,onPressedEdit: (Todo todo) {
-                  print("presss on edit");
-                  _todo.remove(todo);
-                  Navigator.pop(context);
+              child: _todo.isEmpty?Text("ITs empty please be more active"):Todolist(
+                todos: _todo,
+                onPressedEdit: (Todo todo) {
+                   print("click at homescree annd data is ${todo.title}");
+                 
+
+                  showModalBottomSheet(context: context,
+                  isScrollControlled: true,builder: (context) {
+                    return CreateButtonsheet(
+                      todotoEdit: todo,onPressedCreate: (Todo todo,bool isedited){
+                   if(isedited)
+                      {final indextoupdate=_todo.indexWhere((element) => element.id==todo.id);
+                       print(indextoupdate);
+                        setState(() {
+                       _todo[indextoupdate]=todo;
+
+                        });
+                      }
+                            
+                                
+                      Navigator.pop(context);
+
+                  },);
+                  
+                 
+               
+                
+                 
+                });
                 },
                 onPressedDelete: (Todo todo) {
                   setState(() {
@@ -86,22 +110,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 isScrollControlled: true,
                 builder: (context) {
                   return Center(
-                    child: CreateButtonsheet(onPressedCreate: (Todo todo){
+                    child: CreateButtonsheet(onPressedCreate: (Todo todo,bool isediting){
+                      if(isediting)
+                      {
+                        print("Editing");
+                      }
+                      else{
+                        print("create new object");
                       setState(() {
                         _todo.add(todo);
-                      });
-                      print("tittle is ${todo.title}");
-                       print("tittle is ${todo.category}");
-                        print("tittle is ${todo.description}");
-                        print("tittle is ${todo.dateTime}");
-
-                      Navigator.pop(context);
+                      });        
+                      }            
                      
+                  
                     },
                      
                     ),
                   );
-                });
+                }
+                );
           },
         ),
       ),

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class ToDoActionBottomsheet extends StatelessWidget {
 
  final Function() onPressedEdit;
- final Function() onPressedDelete_todoactionbotton;
+ final Function() onPressedDelete;
   const ToDoActionBottomsheet
 ({super.key,
-required this.onPressedEdit,required this.onPressedDelete_todoactionbotton});
+required this.onPressedEdit,required this.onPressedDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +15,12 @@ required this.onPressedEdit,required this.onPressedDelete_todoactionbotton});
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(title: Text("Edit"),
-        leading: Icon(Icons.edit_rounded,color: Colors.black,),
-        onTap:onPressedEdit,),
+        leading:const Icon(Icons.edit_rounded,color: Colors.black,),
+        onTap: onPressedEdit
+        ,),
         ListTile(title:Text("Delete") ,
-        leading: Icon(Icons.delete_rounded,color: Colors.black,),
-        onTap: onPressedDelete_todoactionbotton,)
+        leading:const Icon(Icons.delete_rounded,color: Colors.red,),
+        onTap: onPressedDelete,)
       ],
     );
   }
